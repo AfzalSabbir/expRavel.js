@@ -7,9 +7,9 @@ var path          = require('path');
 var cookieParser  = require('cookie-parser');
 var logger        = require('morgan');
 const myHelper    = require('./app/Helper');
-const route_name  = require('./routes/web').route_name;
 const mainRouter  = require('./routes/web').router;
-const helpers     = require('handlebars-helpers')();
+
+require('./app/handlebars/Helper');
 
 const app = express();
 
@@ -46,20 +46,17 @@ class Server
   }
   
   initRoutes(){
-    helpers.route = (route) => {
-      return route_name[route];
-    }
     app.use('/', mainRouter);
   }
   
   initErrorHandler(){
     // catch 404 and forward to error handler
-    app.use(function(req, res, next, route_name) {
+    app.use(function(req, res, next) {
       next(createError(404));
     });
     
     // error handler
-    app.use(function(err, req, res, next, route_name) {
+    app.use(function(err, req, res, next) {
       // set locals, only providing error in development
       res.locals.message = err.message;
       res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -1,4 +1,3 @@
-const namespace = 'app';
 const backSlash = '\\';
 const base      = backSlash + 'controllers';
 const fs        = require('fs');

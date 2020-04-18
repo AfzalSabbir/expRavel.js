@@ -1,6 +1,7 @@
-const namespace = 'app/controllers/Backend';
 const express = require('express');
-let data = {};
+const app = express();
+let data = require('../../../private/data');
+const logo = '(R)';
 
 class UserContrller {
     constructor() {

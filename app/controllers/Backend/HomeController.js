@@ -1,13 +1,8 @@
-const namespace     = 'app/controllers/Backend';
-const express       = require('express');
-const route_name    = require('../../../routes/web');
-const app           = express();
-let data            = {
-    icon: 'expRavel.js',
-};
-let arr = ['a', 'b', 'c'];
-
-// console.log(express.application);
+const express = require('express');
+const app = express();
+let data = require('../../../private/data');
+const logo = '(R)';
+let arr = [];
 
 class HomeContrller
 {
@@ -17,44 +12,38 @@ class HomeContrller
     controller(){
         return {
             index: (req, res, next) => {
-                console.log(data);
-                
                 data = {
                     ...data,
                     title: 'expRavel',
+                    pre: logo,
+                    this_route: 'admin_index',
                     condition: true,
                     arr: arr
                 };
-                console.log(data);
                 res.render('backend/pages/index', data);
-            },
-            submitId: (req, res, next) => {
-                data = {
-                    ...data,
-                    title: `Express ID: ${req.params.id}`,
-                    condition: true,
-                    ID: req.params.id,
-                    arr: arr
-                };
-                res.render('backend/pages/index', data);
-            },
-            submit: (req, res, next) => {
-                var id = req.body.id;
-                arr.push(id);
-                res.redirect('/admin/submit/' + id);
-            },
-            delete: (req, res, next) => {
-                var id = req.params.id;
-                arr.splice(id, 1);
-                res.redirect('/admin/submit/'+id);
             },
             home: (req, res, next) => {
                 data = {
                     ...data,
-                    title: 'Home'
+                    title: 'Home',
+                    pre: logo,
+                    this_route: 'admin_home',
                 };
                 res.render('backend/pages/home', data);
-            }
+            },
+            submitStr: (req, res, next) => {
+                res.redirect('/admin');
+            },
+            submit: (req, res, next) => {
+                var id = req.body.id;
+                arr.push(id);
+                res.redirect('/admin');
+            },
+            delete: (req, res, next) => {
+                var id = req.params.id;
+                arr.splice(id, 1);
+                res.redirect('/admin');
+            },
         }
     }
 }

@@ -1,7 +1,4 @@
-const namespace = 'app';
-
 const express = require('express');
-
 
 class Helper {
     constructor() {

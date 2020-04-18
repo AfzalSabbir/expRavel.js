@@ -3,7 +3,6 @@ let router        = express.Router();
 const Controller  = require('../app/Controller');
 
 let router_ = route_url = new_route_name = route_name = {};
-// console.log(Controller.Backend.HomeController.index.toString());
 
 class Web
 {
@@ -16,9 +15,9 @@ class Web
 
     router.prefix('/admin', async (admin) => {
       admin.route("/").get(Controller.Backend.HomeController.index).$$admin_index$$;
-      admin.route('/submit/:id').get(Controller.Backend.HomeController.submitId).$$admin_submit_id$$;
-      admin.route('/delete/:id').get(Controller.Backend.HomeController.delete).$$admin_delete$$;
       admin.route('/submit').post(Controller.Backend.HomeController.submit).$$admin_submit$$;
+      admin.route('/submit/:str').get(Controller.Backend.HomeController.submitStr).$$admin_submit_str$$;
+      admin.route('/delete/:id').get(Controller.Backend.HomeController.delete).$$admin_delete$$;
       admin.route('/home').get(Controller.Backend.HomeController.home).$$admin_home$$;
     });
     router.prefix('/', async (index) => {
@@ -37,7 +36,7 @@ class Web
       new_route_name = (configure.toString().match(/\$\$(\w+)\$\$/gm)).toString().match(/(\w+)/gm);
       route_name = {};
       new_route_name.forEach((element, key) => {
-        route_name[element] = (path + route_url[key].replace(/["']/gm, '')).replace('//', '/');
+        route_name[element] = ((path + route_url[key].replace(/["']/gm, '')).replace('//', '/')).replace(/\/$/, "");
       });
       
       express.application.route_name = { ...express.application.route_name, ...route_name };
