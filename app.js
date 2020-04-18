@@ -3,13 +3,13 @@ var express       = require('express');
 var validator     = require('express-validator');
 var session       = require('express-session');
 const hbs         = require('express-handlebars');
-const helpers     = require('handlebars-helpers')();
 var path          = require('path');
 var cookieParser  = require('cookie-parser');
 var logger        = require('morgan');
 const myHelper    = require('./app/Helper');
-var mainRouter    = require('./routes/web');
-// var mainRouter    = express.Router();
+const route_name  = require('./routes/web').route_name;
+const mainRouter  = require('./routes/web').router;
+const helpers     = require('handlebars-helpers')();
 
 const app = express();
 
@@ -46,18 +46,20 @@ class Server
   }
   
   initRoutes(){
-    // console.log(mainRouter);
+    helpers.route = (route) => {
+      return route_name[route];
+    }
     app.use('/', mainRouter);
   }
   
   initErrorHandler(){
     // catch 404 and forward to error handler
-    app.use(function(req, res, next) {
+    app.use(function(req, res, next, route_name) {
       next(createError(404));
     });
     
     // error handler
-    app.use(function(err, req, res, next) {
+    app.use(function(err, req, res, next, route_name) {
       // set locals, only providing error in development
       res.locals.message = err.message;
       res.locals.error = req.app.get('env') === 'development' ? err : {};

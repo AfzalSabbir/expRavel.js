@@ -8,13 +8,15 @@ var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
 
+const chalk = require('chalk');
+
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '1971');
 app.set('port', port);
-console.log(`PORT: ${port}`);
+console.log(chalk.bold.white('\n\u26F5 PORT:'+chalk.bold.green(` ${port} `)+'\n'));
 
 /**
  * Create HTTP server.

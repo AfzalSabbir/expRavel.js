@@ -1,10 +1,10 @@
 const namespace = 'app';
 const backSlash = '\\';
-const base = backSlash + 'controllers';
-const fs = require('fs');
-const path = require('path');
-const express = require('express');
-const chalk = require('chalk');
+const base      = backSlash + 'controllers';
+const fs        = require('fs');
+const path      = require('path');
+const express   = require('express');
+const chalk     = require('chalk');
 
 let parent_dir_ = controllerName = dir_ = ''
     , controller = allController = console_ = {}

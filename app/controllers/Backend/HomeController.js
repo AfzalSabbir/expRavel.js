@@ -1,8 +1,13 @@
-const namespace = 'app/controllers/Backend';
-const express = require('express');
-let data = {};
+const namespace     = 'app/controllers/Backend';
+const express       = require('express');
+const route_name    = require('../../../routes/web');
+const app           = express();
+let data            = {
+    icon: 'expRavel.js',
+};
 let arr = ['a', 'b', 'c'];
-const init = 1;
+
+// console.log(express.application);
 
 class HomeContrller
 {
@@ -12,20 +17,23 @@ class HomeContrller
     controller(){
         return {
             index: (req, res, next) => {
+                console.log(data);
+                
                 data = {
-                    title: 'Express',
+                    ...data,
+                    title: 'expRavel',
                     condition: true,
-                    init: init,
                     arr: arr
                 };
+                console.log(data);
                 res.render('backend/pages/index', data);
             },
             submitId: (req, res, next) => {
                 data = {
+                    ...data,
                     title: `Express ID: ${req.params.id}`,
                     condition: true,
                     ID: req.params.id,
-                    init: init,
                     arr: arr
                 };
                 res.render('backend/pages/index', data);
@@ -33,15 +41,16 @@ class HomeContrller
             submit: (req, res, next) => {
                 var id = req.body.id;
                 arr.push(id);
-                res.redirect('/submit/' + id);
+                res.redirect('/admin/submit/' + id);
             },
             delete: (req, res, next) => {
                 var id = req.params.id;
                 arr.splice(id, 1);
-                res.redirect('/submit/'+id);
+                res.redirect('/admin/submit/'+id);
             },
             home: (req, res, next) => {
                 data = {
+                    ...data,
                     title: 'Home'
                 };
                 res.render('backend/pages/home', data);

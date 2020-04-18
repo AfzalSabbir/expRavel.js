@@ -10,7 +10,7 @@
 <body class="bg-light">
   <div class="bg-dark">
     <nav class="container navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">ExpressJS</a>
+      <a class="navbar-brand" href="{{ route 'admin_index' }}"> {{ icon }}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -19,7 +19,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{ route 'admin_home' }}">Home <span class="sr-only">(current)</span></a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -29,8 +29,9 @@
       </div>
     </nav>
   </div>
-  <main class="container" style="background-color: #f0f0f0;">
+  <main class="container" style="background-color: #f0f0f0; min-height: 768px;">
     {{{ body }}}
   </main>
+  {{> footer }}
 </body>
 </html>

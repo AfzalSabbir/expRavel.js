@@ -1,15 +1,17 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-<form id="form" class="my-3" action="/submit" method="POST">
+<div class="text-center mb-4">
+  <h1>{{title}}</h1>
+  <p>Welcome to {{title}}</p>
+</div>
+<form id="form" class="my-3" action="/admin/submit" method="POST">
   <input type="text" class="form-control" name="id" autofocus="" required="required">
   <button type="submit" class="btn btn-success my-1">Send</button>
 </form>
 {{#if condition}}
   <div class="form-row">
     {{#each arr as |alias key|}}
-    <div class="col-md-3 my-1">
+    <div class="col-md-2 my-1">
       <div class="card">
-        <div class="card-header">{{ add key 1 }}. {{alias}} <a href="/delete/{{ key }}" class="close text-danger"> &times;</a></div>
+        <div class="card-header">{{ add key 1 }}. {{alias}} <a href="/admin/delete/{{ key }}" class="close text-danger"> &times;</a></div>
       </div>
     </div>
     {{/each}}
