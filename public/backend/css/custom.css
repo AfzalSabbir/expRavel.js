@@ -877,12 +877,14 @@ img.small-p-image {
   height: 23px;
 }
 .nav-item.active{
-  background: var(--green);
-  border-radius: 3px;
+  color: var(--green);
+  text-decoration: underline;
+  /* border-radius: 3px; */
 }
 .nav-item:hover {
-  background: #000;
-  border-radius: 3px;
+  color: #000;
+  text-decoration: underline;
+  /* border-radius: 3px; */
 }
 .treeview-item.active {
   background: #264d5d;

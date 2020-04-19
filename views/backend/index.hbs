@@ -1,12 +1,12 @@
-<div class="text-center mb-4">
-  <h1>{{title}}</h1>
-  <p>Welcome to {{title}}</p>
+<div class="row mt-5">
+  <div class="col-md-6 mx-auto">
+    <form id="form" class="my-3 d-flex" action="{{route 'admin_submit'}}" method="POST">
+      <input type="text" class="form-control rounded-0 rounded-left" name="id" autofocus="" required="required">
+      <button type="submit" class="btn btn-success rounded-0 rounded-right">Save</button>
+    </form>
+  </div>
 </div>
-<form id="form" class="my-3" action="/admin/submit" method="POST">
-  <input type="text" class="form-control" name="id" autofocus="" required="required">
-  <button type="submit" class="btn btn-success my-1">Send</button>
-</form>
-{{#if condition}}
+{{#if showForm}}
   <div class="form-row">
     {{#each arr as |alias key|}}
     <div class="col-md-2 my-1">

@@ -2,6 +2,11 @@ const express = require('express');
 const path = require('path')
 let router = express.Router();
 const Controller = require(path.join(__basedir, '/app/Controller'));
+const mongo = require('mongodb');
+
+// console.log(mongo);
+
+const assert = require('assert');
 
 let router_ = route_url = new_route_name = route_name = {};
 
@@ -20,6 +25,18 @@ class Web
       admin.route('/submit/:str').get(Controller.Backend.HomeController.submitStr).$$admin_submit_str$$;
       admin.route('/delete/:id').get(Controller.Backend.HomeController.delete).$$admin_delete$$;
       admin.route('/home').get(Controller.Backend.HomeController.home).$$admin_home$$;
+      admin.route('/register').get(Controller.Backend.HomeController.register).$$admin_register$$;
+      admin.route('/register').post(Controller.Backend.HomeController.registerSubmit).$$admin_register_submit$$;
+    });
+
+    router.prefix('/admin/crud', async (crud) => {
+      crud.route("/").get(Controller.Backend.CrudController.index).$$admin_crud_index$$;
+      crud.route('/submit').post(Controller.Backend.CrudController.submit).$$admin_crud_submit$$;
+      crud.route('/submit/:str').get(Controller.Backend.CrudController.submitStr).$$admin_crud_submit_str$$;
+      crud.route('/delete/:id').get(Controller.Backend.CrudController.delete).$$admin_crud_delete$$;
+      crud.route('/home').get(Controller.Backend.CrudController.home).$$admin_crud_home$$;
+      crud.route('/register').get(Controller.Backend.CrudController.register).$$admin_crud_register$$;
+      crud.route('/register').post(Controller.Backend.CrudController.registerSubmit).$$admin_crud_register_submit$$;
     });
     router.prefix('/', async (index) => {
       index.route('/').get(Controller.Backend.HomeController.index).$$index$$;
@@ -55,7 +72,7 @@ class Web
     };
   }
 
-  moduleExport(){
+  moduleExport(){    
     module.exports = {
       router: router,
       route_name: express.application.route_name,

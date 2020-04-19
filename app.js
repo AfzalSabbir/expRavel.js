@@ -1,16 +1,16 @@
-var createError   = require('http-errors');
-var express       = require('express');
-global.__basedir  = __dirname;
-var validator     = require('express-validator');
-var session       = require('express-session');
-const hbs         = require('express-handlebars');
-var path          = require('path');
-var cookieParser  = require('cookie-parser');
-var logger        = require('morgan');
-const myHelper    = require(path.join(__basedir, '/app/Helper'));
-const mainRouter  = require(path.join(__basedir, '/routes/web')).router;
+var createError = require('http-errors');
+var express = require('express');
+global.__basedir = __dirname;
+var expressValidator = require('express-validator');
+var expressSession = require('express-session');
+const hbs = require('express-handlebars');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-require(path.join(__basedir, '/app/handlebars/NewHelper'));
+const myHelper = require(path.join(__basedir, '/app/Helper'));
+const NewHelper = require(path.join(__basedir, '/app/handlebars/NewHelper'));
+const mainRouter = require('./routes/_web_').router;
 
 const app = express();
 
@@ -41,9 +41,10 @@ class Server
     app.use(logger('dev'));
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
-    // app.use(validator());
     app.use(cookieParser());
+    app.use(expressValidator());
     app.use(express.static(path.join(__dirname, 'public')));
+    app.use(expressSession({secret: 'max', saveUninitialized: false, resarve: false}));
   }
   
   initRoutes(){
