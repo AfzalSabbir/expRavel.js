@@ -1,6 +1,7 @@
-let express       = require('express');
-let router        = express.Router();
-const Controller  = require('../app/Controller');
+const express = require('express');
+const path = require('path')
+let router = express.Router();
+const Controller = require(path.join(__basedir, '/app/Controller'));
 
 let router_ = route_url = new_route_name = route_name = {};
 
@@ -32,16 +33,25 @@ class Web
       configure(router_);
       this.use(path, router_);
       
-      route_url = (configure.toString()).match(/[\'\"].+[\'\"]/gm);
-      new_route_name = (configure.toString().match(/\$\$(\w+)\$\$/gm)).toString().match(/(\w+)/gm);
+      route_url = getRouteUrl(configure);
+      new_route_name = getNewRouteName(configure);
       route_name = {};
       new_route_name.forEach((element, key) => {
-        route_name[element] = ((path + route_url[key].replace(/["']/gm, '')).replace('//', '/')).replace(/\/$/, "");
+        route_name[element] = getRouteName(path, route_url, key);
       });
       
       express.application.route_name = { ...express.application.route_name, ...route_name };
 
       return router_;
+    };
+    function getRouteUrl(configure){
+      return (configure.toString()).match(/[\'\"].+[\'\"]/gm);
+    };
+    function getNewRouteName(configure){
+      return (configure.toString().match(/\$\$(\w+)\$\$/gm)).toString().match(/(\w+)/gm);
+    };
+    function getRouteName(path, route_url, key){
+      return ((path + route_url[key].replace(/["']/gm, '')).replace('//', '/')).replace(/\/$/, "");
     };
   }
 

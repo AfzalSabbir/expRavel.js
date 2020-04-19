@@ -1,16 +1,16 @@
 var createError   = require('http-errors');
 var express       = require('express');
+global.__basedir  = __dirname;
 var validator     = require('express-validator');
 var session       = require('express-session');
 const hbs         = require('express-handlebars');
 var path          = require('path');
 var cookieParser  = require('cookie-parser');
 var logger        = require('morgan');
-const myHelper    = require('./app/Helper');
-const mainRouter  = require('./routes/web').router;
+const myHelper    = require(path.join(__basedir, '/app/Helper'));
+const mainRouter  = require(path.join(__basedir, '/routes/web')).router;
 
-// require('./app/handlebars/Helper');
-require('./app/handlebars/NewHelper');
+require(path.join(__basedir, '/app/handlebars/NewHelper'));
 
 const app = express();
 

@@ -1,5 +1,6 @@
+const path = require('path');
 const hbs = require('express-handlebars');
-const route_name = require('../../routes/web').route_name;
+const route_name = require(path.join(__basedir, '/routes/web')).route_name;
 
 let newHbs = hbs.create({});
 
@@ -9,22 +10,6 @@ class NewHelper {
         this.moduleExports();
     }
     newHelpers() {
-        newHbs.handlebars.registerHelper('route', function (route) {
-            console.log(route);
-            
-            return route_name[route];
-        });
-        newHbs.handlebars.registerHelper('nav_active', function (this_route, target_route) {
-            if (this_route == target_route) {
-                return 'active';
-            } else {
-                return '';
-            }
-        });
-        newHbs.handlebars.registerHelper('concat', function (str1, str2) {
-            return str1 + str2;
-        });
-        
         // https://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional
         newHbs.handlebars.registerHelper( {
             eq: function (v1, v2) {
@@ -52,6 +37,22 @@ class NewHelper {
                 return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
             }
         });
+        newHbs.handlebars.registerHelper( {
+            route: function (route) {
+                return route_name[route];
+            },
+            nav_active: function (this_route, target_route) {
+                if (this_route == target_route) {
+                    return 'active';
+                } else {
+                    return '';
+                }
+            },
+            concat: function (str1, str2) {
+                return str1 + str2;
+            },
+        });
+        
 
     }
     moduleExports() {
