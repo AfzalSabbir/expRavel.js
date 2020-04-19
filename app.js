@@ -9,7 +9,8 @@ var logger        = require('morgan');
 const myHelper    = require('./app/Helper');
 const mainRouter  = require('./routes/web').router;
 
-require('./app/handlebars/Helper');
+// require('./app/handlebars/Helper');
+require('./app/handlebars/NewHelper');
 
 const app = express();
 
