@@ -30,8 +30,8 @@ class Server
     app.engine('hbs', hbs({
       extname: 'hbs',
       defaultLayout: 'master',
-      layoutsDir: path.join(__dirname, '/views/backend/layouts'),
-      partialsDir: path.join(__dirname, '/views/backend/partials'),
+      layoutsDir: path.join(__dirname, '/views/layouts'),
+      partialsDir: path.join(__dirname, '/views/partials'),
     }));
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'hbs');

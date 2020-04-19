@@ -20,7 +20,7 @@ class HomeContrller
                     condition: true,
                     arr: arr
                 };
-                res.render('backend/pages/index', data);
+                res.render('backend/index', data);
             },
             home: (req, res, next) => {
                 data = {
@@ -29,7 +29,7 @@ class HomeContrller
                     pre: logo,
                     this_route: 'admin_home',
                 };
-                res.render('backend/pages/home', data);
+                res.render('backend/home', data);
             },
             submitStr: (req, res, next) => {
                 res.redirect('/admin');
