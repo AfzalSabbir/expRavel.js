@@ -27,7 +27,7 @@ class HomeContrller
                     ...data,
                     title: 'Home',
                     pre: logo,
-                    this_route: 'admin_home',
+                    this_route: 'admin.home',
                 };
                 res.render('backend/home', data);
             },
@@ -38,7 +38,7 @@ class HomeContrller
                     pre: logo,
                     success: false,
                     errors: req.session.errors,
-                    this_route: 'admin_register',
+                    this_route: 'admin.register',
                 };
                 res.render('backend/register', data);
                 req.session.errors = null;

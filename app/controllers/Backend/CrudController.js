@@ -16,7 +16,7 @@ class CrudContrller
                     ...data,
                     title: 'expRavel',
                     pre: logo,
-                    this_route: 'admin_crud',
+                    this_route: 'admin.crud',
                     showForm: true,
                     arr: arr
                 };

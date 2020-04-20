@@ -8,20 +8,13 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item mx-1 {{ nav_active this_route 'admin' }}">
-                    <a class="nav-link" href="{{ route 'admin' }}">Dashboard <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item mx-1 {{ nav_active this_route 'admin_crud' }}">
-                    <a class="nav-link" href="{{ route 'admin_crud' }}">Crud <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item mx-1 {{ nav_active this_route 'admin_home' }}">
-                    <a class="nav-link" href="{{ route 'admin_home' }}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item mx-1 {{ nav_active this_route 'admin_register' }}">
-                    <a class="nav-link" href="{{ route 'admin_register' }}">Register <span class="sr-only">(current)</span></a>
-                </li>
+                {{!-- nav is from ./private/data['nav'] --}}
+                {{#each nav as |nav_name key|}}
+                    <li class="nav-item mx-1 {{ nav_active ../this_route key }} {{key}}">
+                        <a class="nav-link" href="{{ route key }}">{{nav_name}} <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                {{/each}}
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
